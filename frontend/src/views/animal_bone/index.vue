@@ -6,6 +6,7 @@
         <p class="page-desc">维护动物骨骼标本，围绕标本编号、出土单位、种属判定、骨骼部位做登记、筛选与状态流转。</p>
       </div>
       <div class="page-actions">
+        <RouterLink class="btn" to="/animal_bone/batch">进入鉴定编组台</RouterLink>
         <button class="btn primary" type="button" @click="openCreate">登记动物骨骼标本</button>
         <button class="btn" type="button" @click="exportRows">导出动物骨骼清单</button>
       </div>
@@ -82,7 +83,7 @@ import {
 import type { EntryRow } from '@/data/types'
 
 const meta = moduleMeta('animal_bone')
-const columns = ["标本编号", "出土单位", "种属判定", "骨骼部位", "数量统计", "最小个体数", "鉴定人", "鉴定状态"]
+const columns = ["标本编号", "出土单位", "种属判定", "骨骼部位", "数量统计", "最小个体数", "鉴定人", "鉴定状态", "所属批次", "复核意见"]
 const actions = ["开始鉴定", "提交鉴定", "复核鉴定"]
 const statuses = ["已采集", "鉴定中", "已鉴定", "已复核", "已归档"]
 const stats = [{"label": "标本总数", "value": 0}, {"label": "已鉴定数", "value": 0}, {"label": "鉴定中数", "value": 0}]

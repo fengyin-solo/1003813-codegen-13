@@ -13,6 +13,7 @@ const Diary = () => import('@/views/diary/index.vue')
 const Survey = () => import('@/views/survey/index.vue')
 const HumanBone = () => import('@/views/human_bone/index.vue')
 const AnimalBone = () => import('@/views/animal_bone/index.vue')
+const AnimalBoneBatch = () => import('@/views/animal_bone/batch.vue')
 const Pottery = () => import('@/views/pottery/index.vue')
 const Conservation = () => import('@/views/conservation/index.vue')
 const Coordinate = () => import('@/views/coordinate/index.vue')
@@ -36,6 +37,7 @@ const router = createRouter({
     { path: '/survey', name: 'survey', component: Survey },
     { path: '/human_bone', name: 'human_bone', component: HumanBone },
     { path: '/animal_bone', name: 'animal_bone', component: AnimalBone },
+    { path: '/animal_bone/batch', name: 'animal_bone_batch', component: AnimalBoneBatch },
     { path: '/pottery', name: 'pottery', component: Pottery },
     { path: '/conservation', name: 'conservation', component: Conservation },
     { path: '/coordinate', name: 'coordinate', component: Coordinate },

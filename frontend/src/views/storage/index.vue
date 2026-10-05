@@ -82,9 +82,9 @@ import {
 import type { EntryRow } from '@/data/types'
 
 const meta = moduleMeta('storage')
-const columns = ["架位编号", "库房名称", "存放器物类别", "架位层数", "容纳件数", "当前件数", "管理人", "架位状态"]
-const actions = ["存放器物", "调整整理", "临时封存"]
-const statuses = ["正常使用", "已满", "待整理", "临时封存"]
+const columns = ["架位编号", "库房名称", "存放器物类别", "架位层数", "容纳件数", "当前件数", "管理人", "架位状态", "来源批次", "标本编号"]
+const actions = ["确认入藏", "存放器物", "调整整理", "临时封存"]
+const statuses = ["待入藏", "正常使用", "已满", "待整理", "临时封存"]
 const stats = [{"label": "架位总数", "value": 0}, {"label": "已满架位", "value": 0}, {"label": "可用架位", "value": 0}]
 
 const rows = ref<EntryRow[]>([])
