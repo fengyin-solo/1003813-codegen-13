@@ -1,4 +1,5 @@
 import { MODULE_BY_KEY } from '@/data/modules'
+import { findBatchByEntry } from '@/data/ident-batch'
 import { allRows, listRows, resetRows, saveRows } from '@/data/local-store'
 import type { ActionResult, EntryRow, ModuleMeta, OverviewResult, PageResult } from '@/data/types'
 
@@ -38,6 +39,17 @@ export function runAction(key: string, id: number, action: string): ActionResult
   const index = rows.findIndex((row) => Number(row.id) === id)
   if (index < 0) {
     return { ok: false, message: `没有找到编号为 ${id} 的${meta.entity}` }
+  }
+  // 动物骨骼一旦编入鉴定批次，状态机由编组台接管：单件通用动作一律拦住，
+  // 避免绕过批次把已进入鉴定的标本打回已采集，或改动已归档批次的标本。
+  if (key === 'animal_bone') {
+    const boundBatch = findBatchByEntry(id)
+    if (boundBatch) {
+      return {
+        ok: false,
+        message: `标本已编入鉴定批次「${boundBatch.batchNo}」（${boundBatch.status}），请在鉴定编组台中按批次流转`,
+      }
+    }
   }
   const current = String(rows[index].status)
   if (current === target) {

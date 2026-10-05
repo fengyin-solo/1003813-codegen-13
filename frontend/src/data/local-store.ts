@@ -20,6 +20,18 @@ function readStorage(): Record<string, EntryRow[]> {
   }
   try {
     const parsed = JSON.parse(raw) as Record<string, EntryRow[]>
+    // 一次性迁移：鉴定编组台上线前已打开过系统的浏览器，动物骨骼还是旧占位数据，
+    // 与演示批次引用的标本编号对不上；检测到旧库且没有编组台数据时，替换该模块为新示例。
+    if (
+      Array.isArray(parsed.animal_bone) &&
+      parsed.animal_bone.length === 3 &&
+      typeof window !== 'undefined' &&
+      window.localStorage &&
+      !window.localStorage.getItem('field-archaeology-digital:ident-batches')
+    ) {
+      parsed.animal_bone = clone(SEED_ROWS.animal_bone ?? [])
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed))
+    }
     return { ...fallback, ...parsed }
   } catch {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(fallback))
